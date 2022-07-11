@@ -1,0 +1,302 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Shell | Cosmology</title><meta name="keywords" content="Note"><meta name="author" content="陆志宇,zhiyulupmo@gmail.com"><meta name="copyright" content="陆志宇"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第一章开胃菜 chmod命令可修改文件权限， +x 参数使文件有可执行权限 在脚本第一行 使用”#! &#x2F;bin&#x2F;sh” 可以选择解释器，#! &#x2F;usr&#x2F;bin&#x2F;python 即为python解释器(路径需修改) source命令使修改立即生效（即当前shell内就生效）  变量 变量本质是键值对  在命令行内就可以定义变量 12key&#x3D;&quot;linux shell&quot;echo $ke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shell">
+<meta property="og:url" content="http://example.com/2020/02/02/Linux%20shell%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Cosmology">
+<meta property="og:description" content="第一章开胃菜 chmod命令可修改文件权限， +x 参数使文件有可执行权限 在脚本第一行 使用”#! &#x2F;bin&#x2F;sh” 可以选择解释器，#! &#x2F;usr&#x2F;bin&#x2F;python 即为python解释器(路径需修改) source命令使修改立即生效（即当前shell内就生效）  变量 变量本质是键值对  在命令行内就可以定义变量 12key&#x3D;&quot;linux shell&quot;echo $ke">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2020-02-02T12:00:02.000Z">
+<meta property="article:modified_time" content="2022-07-10T07:20:53.778Z">
+<meta property="article:author" content="陆志宇">
+<meta property="article:tag" content="Note">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2020/02/02/Linux%20shell%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Shell',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-07-10 15:20:53'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/fangao.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Cosmology</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Shell</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-02-02T12:00:02.000Z" title="发表于 2020-02-02 20:00:02">2020-02-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-07-10T07:20:53.778Z" title="更新于 2022-07-10 15:20:53">2022-07-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Shell"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><h2 id="开胃菜"><a href="#开胃菜" class="headerlink" title="开胃菜"></a>开胃菜</h2><ol>
+<li>chmod命令可修改文件权限， +x 参数使文件有可执行权限</li>
+<li>在脚本第一行 使用”#! /bin/sh” 可以选择解释器，#! /usr/bin/python 即为python解释器(路径需修改)</li>
+<li>source命令使修改立即生效（即当前shell内就生效）</li>
+</ol>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><ol>
+<li><p>变量本质是键值对</p>
+</li>
+<li><p>在命令行内就可以定义变量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">key=&quot;linux shell&quot;</span><br><span class="line">echo $key</span><br></pre></td></tr></table></figure></li>
+<li><p>对于变量也可以做运算</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">add1=100</span><br><span class="line">add2=200</span><br><span class="line">echo  $(($add1+$add2))</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>想引用变量时，需要在变量名前加$符号</strong>，当赋值内容包含空格时，需要引号;有时候需要用${name}的形式以避免歧义</p>
+</li>
+<li><p>默认都是全局变量，局部变量需要声明</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">定义函数</span></span><br><span class="line">num=111</span><br><span class="line">func1 ()</span><br><span class="line">&#123;</span><br><span class="line">num=123   #默认全局</span><br><span class="line">echo $num</span><br><span class="line">&#125;</span><br><span class="line">func2 ()</span><br><span class="line">&#123;</span><br><span class="line">local num=456</span><br><span class="line">echo $num</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>unset命令从当前shell中删除函数或变量</p>
+</li>
+</ol>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><ol>
+<li><p>如果脚本中设置一个环境变量，需要将这些变量”export”出来，如果配合source命令使之立刻生效</p>
+</li>
+<li><p>export命令用于设置当前进程的环境变量（一次性的）；若想永久保存，可以将export命令置于shell登陆时执行的启动文件之中，例如</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/bin:/usr/bin</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>​                    冒号起分号的做用</p>
+<h1 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h1><h2 id="向脚本传递参数"><a href="#向脚本传递参数" class="headerlink" title="向脚本传递参数"></a>向脚本传递参数</h2><ol>
+<li>传参方法 “./shell.sh a b c”， a b c就是传入的参数</li>
+</ol>
+<h2 id="I-O重定向"><a href="#I-O重定向" class="headerlink" title="I/O重定向"></a>I/O重定向</h2><ol>
+<li><p>将输出打印在temp.txt文件内</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;redirect to file&quot; &gt; temp.txt</span><br></pre></td></tr></table></figure></li>
+<li><p>从temp.txt文件中得到输入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &lt; temp.txt</span><br></pre></td></tr></table></figure>
+
+<p>&lt; &gt;可以组合使用</p>
+</li>
+<li><p>追加内容（不会覆盖）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;line extra&quot; &gt;&gt; temp.txt</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><ol>
+<li><strong>command1 | command2 将命令1的输出作为命令2的输入</strong></li>
+</ol>
+<h2 id="文本检索"><a href="#文本检索" class="headerlink" title="文本检索"></a>文本检索</h2><ol>
+<li>文本检索命令 grep，支持正则表达式</li>
+</ol>
+<h1 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h1><h2 id="再识变量"><a href="#再识变量" class="headerlink" title="再识变量"></a>再识变量</h2><ol>
+<li>shell语言中的一切变量都是字符串类型；有三种变量，用户变量、位置变量、环境变量。</li>
+<li>变量中的特殊字符需要用/转义</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center">特殊字符</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">~</td>
+<td align="center">主目录，相当于$HOME</td>
+</tr>
+<tr>
+<td align="center">&amp;</td>
+<td align="center">后台作业（置于命令末</td>
+</tr>
+<tr>
+<td align="center">\</td>
+<td align="center">转义下一个字符</td>
+</tr>
+<tr>
+<td align="center">？</td>
+<td align="center">单个任意字符</td>
+</tr>
+</tbody></table>
+<ol start="3">
+<li>${varname}可以实现字符处理运算<ul>
+<li>确保变量存在且有值</li>
+<li>设置变量默认值</li>
+<li>捕获未设置变量而导致的错误</li>
+<li>删除匹配模式的变量的值部分内容</li>
+</ul>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>变量运算符</th>
+<th>替换</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>${varname:-word}</td>
+<td>如果varname存在且非null，返回varname，否则返回word</td>
+</tr>
+<tr>
+<td>${varname:=word}</td>
+<td>否则在变量定义为word</td>
+</tr>
+<tr>
+<td>${varname:？message}</td>
+<td>否则打印message,并退出脚本</td>
+</tr>
+<tr>
+<td>${varname:+word}</td>
+<td>存在且非null，返回word；否则返null</td>
+</tr>
+</tbody></table>
+<ol start="4">
+<li>${varname}的模式匹配运算，通常用于切割路劲名称</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">陆志宇</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2020/02/02/Linux%20shell%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">http://example.com/2020/02/02/Linux%20shell%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Cosmology</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Note/">Note</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2020/02/02/hello-world/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Hello World</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/02/02/%E6%90%AD%E7%BD%91%E9%A1%B5%E7%9A%84%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93/" title="网页搭建"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-02</div><div class="title">网页搭建</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/fangao.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">陆志宇</div><div class="author-info__description">Phd.cosmo</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0"><span class="toc-number">1.</span> <span class="toc-text">第一章</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E8%83%83%E8%8F%9C"><span class="toc-number">1.1.</span> <span class="toc-text">开胃菜</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F"><span class="toc-number">1.2.</span> <span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">1.3.</span> <span class="toc-text">环境变量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0"><span class="toc-number">2.</span> <span class="toc-text">第二章</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%91%E8%84%9A%E6%9C%AC%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0"><span class="toc-number">2.1.</span> <span class="toc-text">向脚本传递参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-O%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">2.2.</span> <span class="toc-text">I&#x2F;O重定向</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%A1%E9%81%93"><span class="toc-number">2.2.1.</span> <span class="toc-text">管道</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E6%A3%80%E7%B4%A2"><span class="toc-number">2.3.</span> <span class="toc-text">文本检索</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0"><span class="toc-number">3.</span> <span class="toc-text">第三章</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%8D%E8%AF%86%E5%8F%98%E9%87%8F"><span class="toc-number">3.1.</span> <span class="toc-text">再识变量</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2020/02/02/Linux%20shell%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Shell"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Shell"/></a><div class="content"><a class="title" href="/2020/02/02/Linux%20shell%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Shell">Shell</a><time datetime="2020-02-02T12:00:02.000Z" title="发表于 2020-02-02 20:00:02">2020-02-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/02/02/hello-world/" title="Hello World"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2020/02/02/hello-world/" title="Hello World">Hello World</a><time datetime="2020-02-02T12:00:02.000Z" title="发表于 2020-02-02 20:00:02">2020-02-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/02/02/%E6%90%AD%E7%BD%91%E9%A1%B5%E7%9A%84%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93/" title="网页搭建"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="网页搭建"/></a><div class="content"><a class="title" href="/2020/02/02/%E6%90%AD%E7%BD%91%E9%A1%B5%E7%9A%84%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93/" title="网页搭建">网页搭建</a><time datetime="2020-02-02T12:00:02.000Z" title="发表于 2020-02-02 20:00:02">2020-02-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/02/02/The%20calculation%20of%20CMB%20tensor%20power%20spectrum/" title="CMB"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CMB"/></a><div class="content"><a class="title" href="/2020/02/02/The%20calculation%20of%20CMB%20tensor%20power%20spectrum/" title="CMB">CMB</a><time datetime="2020-02-02T12:00:02.000Z" title="发表于 2020-02-02 20:00:02">2020-02-02</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 陆志宇</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
